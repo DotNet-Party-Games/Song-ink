@@ -16,6 +16,7 @@
 #
 # For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
+name: SocketIOPipe
 on:
   push: 
     branches: [ main ] #Put your Angular project in a different branch so whenever the frontend team pushes it won't activate the workflow of your backend team
