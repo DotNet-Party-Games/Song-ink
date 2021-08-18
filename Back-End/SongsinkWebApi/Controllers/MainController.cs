@@ -98,5 +98,21 @@ namespace SongsinkWebApi.Controllers
         {
             return Ok(await _BL.UpdatePlayer(p_player));
         }
+
+        [HttpGet("getScoreOfPlayer/{p_id}")]
+        public async Task<IActionResult> GetScoreOfPlayer(int p_id)
+        {
+            Player tempPlayer = await _BL.GetAPlayer(p_id);
+            return Ok(tempPlayer.CurrentScore);
+        }
+
+        [HttpPut("updateScoreOfPlayer/{p_id}")]
+        public async Task<IActionResult> UpdateScoreOfPlayer([FromBody] int p_score, int p_id)
+        {
+            Player player = await _BL.GetAPlayer(p_id);
+            player.PlayerScore += p_score;
+            player.CurrentScore += p_score;
+            return Ok(await _BL.UpdatePlayer(player));
+        }
     }
 }
