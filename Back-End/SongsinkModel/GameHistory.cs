@@ -11,7 +11,7 @@ namespace SongsinkModel
     {
         private int _id;
         private DateTime _date;
-        private List<string> _pictureURLs;
+        //private List<string> _pictureURLs;
         private List<GameHistoryPicture> _pictureURLModel = new List<GameHistoryPicture>();
         private string _chatLogURL;
 
@@ -20,7 +20,7 @@ namespace SongsinkModel
         }
         public int Id { get => _id; set => _id = value; }
         public DateTime Date { get => _date; set => _date = value; }
-        public List<string> PictureURLs { get => _pictureURLs; set => _pictureURLs = value; }
+        //public List<string> PictureURLs { get => _pictureURLs; set => _pictureURLs = value; }
         public List<GameHistoryPicture> PictureURLModel { get => _pictureURLModel; set => _pictureURLModel = value; }
         public string ChatLogURL { get => _chatLogURL; set => _chatLogURL = value; }
     }
