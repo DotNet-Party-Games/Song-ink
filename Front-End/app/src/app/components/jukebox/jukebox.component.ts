@@ -43,7 +43,7 @@ export class JukeboxComponent implements OnInit {
           this.currentPlayer.email = response?.email;
           console.log(this.currentPlayer.email);
           this.getUserInfo(this.currentPlayer.email!);
-          this.getSongs();
+          //this.getSongs();
         }
       );
     }
@@ -82,6 +82,7 @@ export class JukeboxComponent implements OnInit {
     }
     this.nextSong();
   }
+
   changeSongs() {
     if (this.currentPlayer.currentScore < Math.abs(this.changeSongsCost)) {
       return;
@@ -119,6 +120,7 @@ export class JukeboxComponent implements OnInit {
       });
 
   }
+  
   nextSong() {
     this.isPaused=false;
     //Shift the array is probably inefficient but its also easy
@@ -131,8 +133,20 @@ export class JukeboxComponent implements OnInit {
     audio.src = this.Songs[0].songURL;
     audio.volume = this.audioVolume;
     audio.load();
-    audio.play();
+
+    const tryToPlay = setInterval(() => {
+  
+      audio.play()
+          .then(() => {
+              clearInterval(tryToPlay);
+          })
+          .catch(error => {
+              console.info('User has not interacted with document yet.');
+          });
+  }, 800);
+
   }
+  
   updateSongTime() {
     let audio = <HTMLAudioElement>document.getElementById('audio');
     this.currentSongTime = audio.currentTime;
@@ -144,6 +158,7 @@ export class JukeboxComponent implements OnInit {
     let audio = <HTMLAudioElement>document.getElementById('audio');
     audio.volume = this.audioVolume;
   }
+  
   onResetPlayer()
   {
     this.isPaused = !this.isPaused;
