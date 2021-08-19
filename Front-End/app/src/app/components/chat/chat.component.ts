@@ -27,19 +27,19 @@ export class ChatComponent implements OnInit, OnDestroy {
   firstCorrect:boolean;
   ableToScore:boolean=true;
   activeDrawer:boolean;
-  
+
 
   title = 'socketio-angular';
-  
+
   constructor(private socketService: SocketIoService) {}
-  
+
   ngOnInit() {
     this._roomsub = this.socketService.currentRoom.subscribe(currentRoom => this.room = currentRoom);
     this._roomsub = this.socketService.goalWord.subscribe(theWord => this.goal=theWord);
     // this._roomsub = this.socketService.currentRoom.pipe(
     //   startWith({ id: '',})
     // ).subscribe(room => this.room = room);
-    
+
     // this._roomsub = this.socketService.chatLogOfRoom.subscribe(recursive => this.chatlines = recursive.reverse());
     // this._roomsub = this.socketService.getNewMessage().subscribe((message:string)=> {
     //     this.chatlines.unshift(message);
@@ -59,7 +59,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     console.log(this.goal);
     console.log(this.ableToScore);
     if(message&&this.goal&&this.ableToScore&&!this.activeDrawer){
-      if(message==this.goal){
+      if(message.toLocaleLowerCase()==this.goal.toLocaleLowerCase()){
       this.socketService.editChat(" guessed correctly!");
       if(this.firstCorrect){
         this.socketService.AddPoints(100);
