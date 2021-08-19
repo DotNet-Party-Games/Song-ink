@@ -37,7 +37,7 @@ namespace SongsinkWebApi
             });
 
             //reference DbContext
-            services.AddDbContext<SIDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Reference2DB")));
+            services.AddDbContext<SIDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Reference2DB")));
 
             //Adds dependencies DL and BL
             services.AddScoped<IDL, DL>();

@@ -19,7 +19,7 @@ export class ChooseWordComponent implements OnInit {
   words: string[];
 
   category = this.socket.fromEvent<string>('room-category');
-  
+
   chosenWord: Word;
   activeDrawer: boolean;
   private _roomsub:Subscription;
@@ -34,8 +34,13 @@ export class ChooseWordComponent implements OnInit {
     };
     this.words = [];
     this._roomsub = this.socketService.activeDrawer.subscribe(draw=>this.activeDrawer=draw);
-    
+
     this.category.subscribe(cat => this.chosenCategory = cat);
+
+    let chooseButton = document.querySelector('#chooseWordButton');
+    chooseButton?.addEventListener('click', event => {
+      chooseButton?.remove();
+    })
   }
 
   openDialog(): void {
@@ -63,7 +68,7 @@ export class ChooseWordComponent implements OnInit {
   templateUrl: './choose-word-dialog.component.html',
 })
 export class ChooseWordDialogComponent {
-  
+
   constructor(
     public dialogRef: MatDialogRef<ChooseWordComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
