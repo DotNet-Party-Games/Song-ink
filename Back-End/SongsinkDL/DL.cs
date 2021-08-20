@@ -25,6 +25,12 @@ namespace SongsinkDL
             return await _context.Words.Select(word => word).ToListAsync();
         }
 
+        
+        public async Task<List<CustomWord>> GetPlayerWords(int p_userID)
+        {
+            return await _context.CustomWords.Where(word => word.PlayerId == p_userID).Select(word => word).ToListAsync();
+        }
+
         public async Task<Word> GetAWord(int p_wordId)
         {
             return await _context.Words.FirstOrDefaultAsync(w => w.Id == p_wordId);
@@ -95,6 +101,24 @@ namespace SongsinkDL
             return await _context.Players.FirstOrDefaultAsync(p => p.Email == p_player.Email);
         }
 
+        public async Task<CustomWord> AddPlayerWord(CustomWord p_word)
+        {
+            await _context.CustomWords.AddAsync(p_word);
+            await _context.SaveChangesAsync();
+            return await _context.CustomWords.FirstOrDefaultAsync(word => word.CustomWordName == p_word.CustomWordName );
+        }
+
+        public async Task<CustomCategory> AddCustomCategory(CustomCategory p_category)
+        {
+            await _context.CustomCategories.AddAsync(p_category);
+            await _context.SaveChangesAsync();
+            return await _context.CustomCategories.FirstOrDefaultAsync(category => category.CustomCategoryName == p_category.CustomCategoryName);
+        }
+
+        public async Task<List<CustomCategory>> GetCustomCategories(int p_playerID)
+        {
+            return await _context.CustomCategories.Where(category => category.PlayerId == p_playerID).ToListAsync();
+        }
         
     }
 }

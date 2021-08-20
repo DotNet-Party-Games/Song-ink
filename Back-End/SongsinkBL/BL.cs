@@ -23,6 +23,11 @@ namespace SongsinkBL
             return await _repo.GetAllWords();
         }
 
+        public async Task<List<CustomWord>> GetPlayerWords(int p_userID)
+        {
+            return await _repo.GetPlayerWords(p_userID);
+        }
+
         public async Task<Word> GetAWord(int p_wordId)
         {
             return await _repo.GetAWord(p_wordId);
@@ -135,6 +140,21 @@ namespace SongsinkBL
                 throw new Exception("Player Not Found");
             }
             return found;
+        }
+
+        public async Task<CustomWord> AddPlayerWord(CustomWord p_word)
+        {
+            return await _repo.AddPlayerWord(p_word);
+        }
+
+        public async Task<CustomCategory> AddCustomCategory(CustomCategory p_category)
+        {
+            return await _repo.AddCustomCategory(p_category);
+        }
+
+        public async Task<List<CustomCategory>> GetCustomCategories(int p_playerID)
+        {
+            return await _repo.GetCustomCategories(p_playerID);
         }
 
     }

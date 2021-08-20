@@ -98,5 +98,29 @@ namespace SongsinkWebApi.Controllers
         {
             return Ok(await _BL.UpdatePlayer(p_player));
         }
+
+        [HttpGet("getPlayerWords/{p_id}")]
+        public async Task<IActionResult> getPlayerWords(int p_id)
+        {
+            return Ok(await _BL.GetPlayerWords(p_id));
+        }
+
+        [HttpGet("getCustomCategories/{p_id}")]
+        public async Task<IActionResult> getCustomCategories(int p_id)
+        {
+            return Ok(await _BL.GetCustomCategories(p_id));
+        }
+
+        [HttpPost("addCustomCategory")]
+        public async Task<IActionResult> addCustomCategory(CustomCategory p_category)
+        {
+            return Created("api/Main/addCustomCategory", await _BL.AddCustomCategory(p_category));
+        }
+
+        [HttpPost("addPlayerWord")]
+        public async Task<IActionResult> addPlayerWord(CustomWord p_word)
+        {
+            return Created("api/Main/addPlayerWord", await _BL.AddPlayerWord(p_word));
+        }
     }
 }

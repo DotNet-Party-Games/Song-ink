@@ -12,7 +12,7 @@ namespace SongsinkModel
 		private int _id;
 		private int _playerId;
 		private string _customWordName;
-		//private int _customCategoryId;
+		private int _customCategoryId;
 
 		public CustomWord()
 		{
@@ -35,6 +35,6 @@ namespace SongsinkModel
 			}
 		}
 
-        //public int CustomCategoryId { get => _customCategoryId; set => _customCategoryId = value; }
+        public int CustomCategoryId { get => _customCategoryId; set => _customCategoryId = value; }
     }
 }
