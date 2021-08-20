@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Profile } from '../models/Profile';
+import { CustomCategory } from '../models/CustomCategory';
+import { CustomWord } from '../models/CustomWord';
 
 const httpOptions = 
 {
@@ -14,7 +16,7 @@ const httpOptions =
   providedIn: 'root'
 })
 export class ProfileService {
-  private url = "https://songsinkbackend.azurewebsites.net/api/Main/";
+  private url = "https://localhost:5001/api/Main/";
   //private url = "http://localhost:3000/profiles/";
   constructor(private http: HttpClient) { }
 
@@ -31,5 +33,29 @@ export class ProfileService {
   {
     return this.http.put<Profile>(this.url+"updatePlayer",playerProfile, httpOptions);
     //return this.http.put<Profile>(this.url+"1",playerProfile);
+  }
+
+  addCategory(category: CustomCategory): Observable<CustomCategory>
+  {
+    return this.http.post<CustomCategory>(this.url+"addCustomCategory", category, httpOptions);
+  }
+
+  removeCategory(category: CustomCategory): Observable<CustomCategory>
+  {
+    return this.http.post<CustomCategory>(this.url+"removeCustomCategory", category, httpOptions);
+  }
+
+  addPlayerWord(word: CustomWord): Observable<CustomWord>
+  {
+    return this.http.post<CustomWord>(this.url+"addPlayerWord", word, httpOptions);
+  }
+  
+  removePlayerWord(word: CustomWord): Observable<CustomWord>
+  {
+    return this.http.post<CustomWord>(this.url+"removePlayerWord", word, httpOptions);
+  }
+
+  getCustomCategories(playerID: number): Observable<CustomCategory[]> {
+    return this.http.get<CustomCategory[]>(`${this.url}getCustomCategories/${playerID}`);
   }
 }
