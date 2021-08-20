@@ -108,6 +108,13 @@ namespace SongsinkDL
         /// <param name="p_word"> The word to be added</param>
         /// <returns> The custom word that was added</returns>
         Task<CustomWord> AddPlayerWord(CustomWord p_word);
+
+        /// <summary>
+        /// Removes a player word from the db
+        /// </summary>
+        /// <param name="p_word"> The word to be removed</param>
+        /// <returns>Returns the word that was removed</returns>
+        Task<CustomWord> RemovePlayerWord(CustomWord p_word);
         
         /// <summary>
         /// Adds a custom category for the user
@@ -115,6 +122,13 @@ namespace SongsinkDL
         /// <param name="p_category"> contains the category name and player id</param>
         /// <returns> the custom category that was created </returns>
         Task<CustomCategory> AddCustomCategory(CustomCategory p_category);
+
+        /// <summary>
+        /// Removes a custom category from the db
+        /// </summary>
+        /// <param name="p_category"> the category to be removed</param>
+        /// <returns>Returns the deleted category</returns>
+        Task<CustomCategory> RemoveCustomCategory(CustomCategory p_category);
 
         /// <summary>
         /// Gets the custom categories of the specified user
