@@ -147,9 +147,19 @@ namespace SongsinkBL
             return await _repo.AddPlayerWord(p_word);
         }
 
+        public async Task<CustomWord> RemovePlayerWord(CustomWord p_word)
+        {
+            return await _repo.RemovePlayerWord(p_word);
+        }
+
         public async Task<CustomCategory> AddCustomCategory(CustomCategory p_category)
         {
             return await _repo.AddCustomCategory(p_category);
+        }
+
+        public async Task<CustomCategory> RemoveCustomCategory(CustomCategory p_category)
+        {
+            return await _repo.RemoveCustomCategory(p_category);
         }
 
         public async Task<List<CustomCategory>> GetCustomCategories(int p_playerID)
