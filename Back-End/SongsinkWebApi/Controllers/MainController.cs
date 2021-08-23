@@ -113,6 +113,8 @@ namespace SongsinkWebApi.Controllers
             player.PlayerScore += p_score;
             player.CurrentScore += p_score;
             return Ok(await _BL.UpdatePlayer(player));
+        }
+        
         [HttpGet("getPlayerWords/{p_id}")]
         public async Task<IActionResult> getPlayerWords(int p_id)
         {
