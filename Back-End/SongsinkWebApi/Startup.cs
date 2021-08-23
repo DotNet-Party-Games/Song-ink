@@ -49,7 +49,7 @@ namespace SongsinkWebApi
                     builder.AddDefaultPolicy(
                         (policy) =>
                         {
-                            policy.WithOrigins("http://127.0.0.1:4200","https://songsink.azurewebsites.net")
+                            policy.WithOrigins("http://localhost:4200","http://127.0.0.1:4200","https://songsink.azurewebsites.net")
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                         }
@@ -71,6 +71,12 @@ namespace SongsinkWebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200", "http://127.0.0.1:4200", "https://songsink.azurewebsites.net")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials());
 
             app.UseAuthorization();
 

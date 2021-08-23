@@ -18,10 +18,10 @@ namespace SongsinkDL
         public DbSet<CustomCategory> CustomCategories { get; set; }
         public DbSet<CustomWord> CustomWords { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder p_options)
-        {
-            p_options.UseSqlServer(@"Server=tcp:revbox.database.windows.net,1433;Initial Catalog=SongInkDB;Persist Security Info=False;User ID=revbox;Password=R3vb0xP@55;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder p_options)
+        //{
+        //    p_options.UseSqlServer(@"");
+        //}
 
         public SIDbContext() : base()
         { }
