@@ -55,18 +55,7 @@ namespace SongsinkDL
         /// </returns>
         Task<List<Song>> GetAllSongs();
 
-        /// <summary>
-        /// Add new game history to DB-GameHistories
-        /// </summary>
-        /// <returns></returns>
-        Task<GameHistory> AddGameHistory(GameHistory p_gameHistory);
-
-        /// <summary>
-        /// Get a game history from DB-GameHistories
-        /// </summary>
-        /// <param name="p_ghId"></param>
-        /// <returns></returns>
-        Task<GameHistory> GetGameHistory(int p_ghId);
+       
 
         /// <summary>
         /// Get A Player from DB-Players

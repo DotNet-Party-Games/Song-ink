@@ -57,20 +57,6 @@ namespace SongsinkDL
             return await _context.Songs.Select(song => song).ToListAsync();
         }
 
-        public async Task<GameHistory> AddGameHistory(GameHistory p_gameHistory)
-        {
-            await _context.GameHistories.AddAsync(p_gameHistory);
-            await _context.SaveChangesAsync();
-            return p_gameHistory;
-        }
-
-        public async Task<GameHistory> GetGameHistory(int p_ghId)
-        {
-            GameHistory gh = await _context.GameHistories.FirstOrDefaultAsync(gh => gh.Id == p_ghId);
-            List<GameHistoryPicture> ghp = await _context.GameHistoryPictures.Where(ghp => ghp.GameHistoryId == p_ghId).Select(ghp => ghp).ToListAsync();
-            gh.PictureURLModel = ghp;
-            return gh;
-        }
 
         public async Task<Player> GetAPlayer(string p_email)
         {
