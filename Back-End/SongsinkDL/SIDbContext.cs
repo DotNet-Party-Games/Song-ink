@@ -15,10 +15,10 @@ namespace SongsinkDL
         public DbSet<CustomCategory> CustomCategories { get; set; }
         public DbSet<CustomWord> CustomWords { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder p_options)
-        {
-            //p_options.UseSqlServer(@"");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder p_options)
+        //{
+        //    p_options.UseSqlServer(@"");
+        //}
 
         public SIDbContext() : base()
         { }

@@ -100,7 +100,7 @@ export class SocketIoService {
     this.tempCurrentLoggedIn=this.currentLoggedIn;
     console.log(this.tempCurrentLoggedIn);
     this.tempCurrentLoggedIn.currentScore=this.tempCurrentLoggedIn.currentScore+add;
-    this.pointApi.updateScoreOfPlayer(this.tempCurrentLoggedIn.id,this.tempCurrentLoggedIn.playerScore);
+    this.pointApi.updateScoreOfPlayer(this.tempCurrentLoggedIn.id,add).subscribe();
     }
   }
 
