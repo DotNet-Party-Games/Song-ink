@@ -17,7 +17,7 @@ const httpOptions =
 })
 export class ProfileService {
   private url = "https://localhost:5001/api/Main/";
-  //private url = "http://localhost:3000/profiles/";
+  
   constructor(private http: HttpClient) { }
 
   getUserInfo(userEmail: string) : Observable<Profile>
