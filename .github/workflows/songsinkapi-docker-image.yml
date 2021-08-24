@@ -32,7 +32,7 @@ jobs:
           # Optional. Set to 1 or true to not run 'dotnet test' command
 #           dotnetDisableTests: # optional
           # Optional extra command arguments the the SonarScanner 'begin' command
-          sonarBeginArguments: /d:sonar.exclusions="**/Migrations/**" && /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx" -d:sonar.exclusions="**/Migrations/**"
           # The SonarQube server URL. For SonarCloud, skip this setting.
 #           sonarHostname: # optional, default is https://sonarcloud.io
           
