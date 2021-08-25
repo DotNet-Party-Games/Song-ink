@@ -331,27 +331,7 @@ namespace SongsinkTests
                 };
 
                 
-                PlayerPicture pic1 = new PlayerPicture()
-                {
-                    Id = 1,
-                    PictureURL = "https://SongStorage.com/picturelist/picture1",
-              
-                };
-                PlayerPicture pic2 = new PlayerPicture()
-                {
-                    Id = 2,
-                    PictureURL = "https://SongStorage.com/picturelist/picture2",
-                };
-                PlayerPicture pic3 = new PlayerPicture()
-                {
-                    Id = 3,
-                    PictureURL = "https://SongStorage.com/picturelist/picture3",
-                };
-                PlayerPicture pic4 = new PlayerPicture()
-                {
-                    Id = 4,
-                    PictureURL = "https://SongStorage.com/picturelist/picture4",
-                };
+               
                 Player player1 = new Player()
                 {
                     Id = 1,
