@@ -62,6 +62,22 @@ namespace SongsinkTests
                     }
                 );
 
+                context.CustomCategories.AddRange(
+                    new CustomCategory 
+                    {
+                        Id=1, 
+                        PlayerId=1,
+                        CustomCategoryName="Fantasy"
+
+                    },
+                    new CustomCategory
+                    {
+                        Id=2,
+                        PlayerId=1,
+                        CustomCategoryName="Movies"
+                    }
+                );
+
                 context.Words.AddRange(
                     new Word
                     {
@@ -98,14 +114,6 @@ namespace SongsinkTests
                     }
                 );
 
-                context.GameHistories.Add(
-                    new GameHistory
-                    {
-                        Date = DateTime.Now,
-                        //PictureURLs = {"asd.com","zxc.com"},
-                        ChatLogURL = "chat.com"
-                    }
-                    );
             }
         }
 
@@ -130,7 +138,24 @@ namespace SongsinkTests
                 }
             }
         }
-    }
+        [Fact]
+        public async void AddCustomCategoryShouldAddACategory()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
 
-    
+                CustomCategory category = new CustomCategory
+                {
+                    PlayerId = 1,
+                    CustomCategoryName="Superheroes"
+                };
+
+                CustomCategory added = await dl.AddCustomCategory(category);
+
+                Assert.NotNull(added);
+                Assert.Equal("Superheroes", added.CustomCategoryName);
+            }
+        }
+    }   
 }
