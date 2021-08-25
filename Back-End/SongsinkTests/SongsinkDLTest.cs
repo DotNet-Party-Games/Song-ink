@@ -204,28 +204,6 @@ namespace SongsinkTests
                         CategoryName = "playercat2"
                     }
                 );
-
-                context.Players.AddRange(
-                    new Player
-                    {
-                        PlayerName = "Player1",
-                        PlayerScore = 1000,
-                        CurrentScore = 875,
-                        GamesPlayed = 10,
-                        Email = "player1@gmail.com",
-                        //CustomWords = { "dog", "cat" }
-                    },
-                    new Player
-                    {
-                        Id = 2,
-                        PlayerName = "Player2",
-                        PlayerScore = 800,
-                        CurrentScore = 120,
-                        GamesPlayed = 15,
-                        Email = "player2@gmail.com",
-                        //CustomWords = { "rabbit", "dragon" }
-                    }
-                );
                 context.CustomCategories.AddRange(
                     new CustomCategory 
                     {
