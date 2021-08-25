@@ -55,36 +55,6 @@ namespace SongsinkDL
         /// </returns>
         Task<List<Song>> GetAllSongs();
 
-       
-
-        /// <summary>
-        /// Get A Player from DB-Players
-        /// </summary>
-        /// <param name="p_email"></param>
-        /// <returns></returns>
-        Task<Player> GetAPlayer(string p_email);
-
-        /// <summary>
-        /// Get A Player from DB-Players
-        /// </summary>
-        /// <param name="p_id"></param>
-        /// <returns></returns>
-        Task<Player> GetAPlayer(int p_id);
-        
-        /// <summary>
-        /// Update Player in DB-Players
-        /// </summary>
-        /// <param name="p_player"></param>
-        /// <returns></returns>
-        Task<Player> UpdatePlayer(Player p_player);
-
-        /// <summary>
-        /// Create new player in DB-Players
-        /// </summary>
-        /// <param name="p_player"></param>
-        /// <returns></returns>
-        Task<Player> CreateNewPlayer(Player p_player);
-
         /// <summary>
         /// Gets all custom words created by a user
         /// </summary>
