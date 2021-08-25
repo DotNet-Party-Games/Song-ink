@@ -154,5 +154,10 @@ namespace SongsinkBL
             return await _repo.GetCustomCategories(p_playerID);
         }
 
+        public async Task<List<CustomWord>> GetCustomWords(int p_customCategoryID)
+        {
+            return await _repo.GetCustomWords(p_customCategoryID);
+        }
+
     }
 }

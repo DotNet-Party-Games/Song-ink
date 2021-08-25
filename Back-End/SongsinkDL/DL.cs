@@ -119,8 +119,12 @@ namespace SongsinkDL
 
         public async Task<List<CustomCategory>> GetCustomCategories(int p_playerID)
         {
-            return await _context.CustomCategories.Where(category => category.PlayerId == p_playerID).ToListAsync();
+            return await _context.CustomCategories.Where(category => category.PlayerId == p_playerID).Select(category => category).ToListAsync();
         }
-        
+
+        public async Task<List<CustomWord>> GetCustomWords(int p_customCategoryID)
+        {
+            return await _context.CustomWords.Where(word => word.CustomCategoryId == p_customCategoryID).Select(word => word).ToListAsync();
+        }
     }
 }

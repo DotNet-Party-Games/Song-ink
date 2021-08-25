@@ -137,5 +137,12 @@ namespace SongsinkBL
         /// <param name="p_playerID">The ID of the user </param>
         /// <returns>Returns a list of custom categories</returns>
         Task<List<CustomCategory>> GetCustomCategories(int p_playerID);
+
+        /// <summary>
+        /// Calls the DL to get a list of custom words
+        /// </summary>
+        /// <param name="p_customCategoryID">the custom category ID</param>
+        /// <returns>Returns a list of CustomWord objects</returns>
+        Task<List<CustomWord>> GetCustomWords(int p_customCategoryID);
     }
 }
