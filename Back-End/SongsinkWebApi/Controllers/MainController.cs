@@ -63,18 +63,6 @@ namespace SongsinkWebApi.Controllers
             return Ok(await _BL.GetAllSongs());
         }
 
-        [HttpPost("addGameHistory")]
-        public async Task<IActionResult> AddGameHistory([FromBody] GameHistory p_gameHistory)
-        {
-            return  Created("api/Main/addGameHistory", await _BL.AddGameHistory(p_gameHistory));
-        }
-
-        [HttpGet("getGameHistory/{p_ghId}")]
-        public async Task<IActionResult> GetGameHistory(int p_ghId)
-        {
-            return Ok(await _BL.GetGameHistory(p_ghId));
-        }
-
         [HttpGet("getAPlayerWithId/{p_id}")]
         public async Task<IActionResult> GetAPlayerWithId(int p_id)
         {
@@ -133,10 +121,22 @@ namespace SongsinkWebApi.Controllers
             return Created("api/Main/addCustomCategory", await _BL.AddCustomCategory(p_category));
         }
 
+        [HttpPost("removeCustomCategory")]
+        public async Task<IActionResult> removeCustomCategory(CustomCategory p_category)
+        {
+            return Ok(await _BL.RemoveCustomCategory(p_category));
+        }
+
         [HttpPost("addPlayerWord")]
         public async Task<IActionResult> addPlayerWord(CustomWord p_word)
         {
             return Created("api/Main/addPlayerWord", await _BL.AddPlayerWord(p_word));
+        }
+
+        [HttpPost("removePlayerWord")]
+        public async Task<IActionResult> removePlayerWord(CustomWord p_word)
+        {
+            return Ok(await _BL.RemovePlayerWord(p_word));
         }
     }
 }

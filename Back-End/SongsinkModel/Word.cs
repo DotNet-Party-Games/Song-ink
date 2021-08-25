@@ -24,10 +24,10 @@ namespace SongsinkModel
 			}
 			set
 			{
-				if (!Regex.IsMatch(value, @"^[A-Za-z]+$"))
-				{
-					throw new Exception("Invalid Input [A-Za-z]");
-				}
+				// if (!Regex.IsMatch(value, @"^[A-Za-z]+$"))
+				// {
+				// 	throw new Exception("Invalid Input [A-Za-z]");
+				// }
 				_wordName = value;
 			}
 		}

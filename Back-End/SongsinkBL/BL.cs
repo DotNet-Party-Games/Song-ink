@@ -93,20 +93,7 @@ namespace SongsinkBL
             return await _repo.GetAllSongs();
         }
 
-        public async Task<GameHistory> AddGameHistory(GameHistory p_gameHistory)
-        {
-            return await _repo.AddGameHistory(p_gameHistory);
-        }
-
-        public async Task<GameHistory> GetGameHistory(int p_ghId)
-        {
-            GameHistory found = await _repo.GetGameHistory(p_ghId);
-            if (found == null)
-            {
-                throw new Exception("GameHistory Not Found");
-            }
-            return found;
-        }
+       
         public async Task<Player> GetAPlayer(string p_email)
         {
             Player found = await _repo.GetAPlayer(p_email);
@@ -147,9 +134,19 @@ namespace SongsinkBL
             return await _repo.AddPlayerWord(p_word);
         }
 
+        public async Task<CustomWord> RemovePlayerWord(CustomWord p_word)
+        {
+            return await _repo.RemovePlayerWord(p_word);
+        }
+
         public async Task<CustomCategory> AddCustomCategory(CustomCategory p_category)
         {
             return await _repo.AddCustomCategory(p_category);
+        }
+
+        public async Task<CustomCategory> RemoveCustomCategory(CustomCategory p_category)
+        {
+            return await _repo.RemoveCustomCategory(p_category);
         }
 
         public async Task<List<CustomCategory>> GetCustomCategories(int p_playerID)

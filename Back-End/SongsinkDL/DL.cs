@@ -57,20 +57,6 @@ namespace SongsinkDL
             return await _context.Songs.Select(song => song).ToListAsync();
         }
 
-        public async Task<GameHistory> AddGameHistory(GameHistory p_gameHistory)
-        {
-            await _context.GameHistories.AddAsync(p_gameHistory);
-            await _context.SaveChangesAsync();
-            return p_gameHistory;
-        }
-
-        public async Task<GameHistory> GetGameHistory(int p_ghId)
-        {
-            GameHistory gh = await _context.GameHistories.FirstOrDefaultAsync(gh => gh.Id == p_ghId);
-            List<GameHistoryPicture> ghp = await _context.GameHistoryPictures.Where(ghp => ghp.GameHistoryId == p_ghId).Select(ghp => ghp).ToListAsync();
-            gh.PictureURLModel = ghp;
-            return gh;
-        }
 
         public async Task<Player> GetAPlayer(string p_email)
         {
@@ -108,11 +94,27 @@ namespace SongsinkDL
             return await _context.CustomWords.FirstOrDefaultAsync(word => word.CustomWordName == p_word.CustomWordName );
         }
 
+        public async Task<CustomWord> RemovePlayerWord(CustomWord p_word)
+        {
+            CustomWord word = await _context.CustomWords.FirstOrDefaultAsync(word => word.Id == p_word.Id);
+            _context.CustomWords.Remove(word);
+            await _context.SaveChangesAsync();
+            return word;
+        }
+
         public async Task<CustomCategory> AddCustomCategory(CustomCategory p_category)
         {
             await _context.CustomCategories.AddAsync(p_category);
             await _context.SaveChangesAsync();
             return await _context.CustomCategories.FirstOrDefaultAsync(category => category.CustomCategoryName == p_category.CustomCategoryName);
+        }
+
+        public async Task<CustomCategory> RemoveCustomCategory(CustomCategory p_category)
+        {
+            CustomCategory category = await _context.CustomCategories.FirstOrDefaultAsync(cat => cat.Id == p_category.Id);
+            _context.CustomCategories.Remove(category);
+            await _context.SaveChangesAsync();
+            return category;
         }
 
         public async Task<List<CustomCategory>> GetCustomCategories(int p_playerID)

@@ -7,8 +7,7 @@ import { Word } from '../models/Word';
 })
 export class ChooseWordService {
 
-  private url = "https://songsinkbackend.azurewebsites.net/api/Main/get4RandomWordsOfACategoryWithCategoryName";
-
+  private url = "https://localhost:5001/api/Main/get4RandomWordsOfACategoryWithCategoryName";
   constructor(private http: HttpClient) { }
 
   getWords(category: string) {

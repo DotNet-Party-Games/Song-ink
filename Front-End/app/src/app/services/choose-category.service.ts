@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class ChooseCategoryService {
 
-  //private apiURL = 'http://localhost:3004/categories';
-  private url = "https://songsinkbackend.azurewebsites.net/api/Main/";
-
+  private url = "https://localhost:5001/api/Main";
   constructor(private http: HttpClient) { }
 
   getDefaultCategories() {

@@ -9,12 +9,9 @@ namespace SongsinkDL
     {
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<PlayerPicture> PlayerPictures { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Word> Words { get; set; }
-        public DbSet<GameHistory> GameHistories { get; set; }
-        public DbSet<GameHistoryPicture> GameHistoryPictures { get; set; }
         public DbSet<CustomCategory> CustomCategories { get; set; }
         public DbSet<CustomWord> CustomWords { get; set; }
 
@@ -38,13 +35,6 @@ namespace SongsinkDL
             p_modelBuilder.Entity<Category>()
                 .HasKey(cat => cat.Id);
 
-            p_modelBuilder.Entity<PlayerPicture>()
-                .Property(pic => pic.Id)
-                .ValueGeneratedOnAdd();
-
-            p_modelBuilder.Entity<PlayerPicture>()
-                .HasKey(pic => pic.Id);
-
             p_modelBuilder.Entity<Player>()
                 .Property(pla => pla.Id)
                 .ValueGeneratedOnAdd();
@@ -65,14 +55,6 @@ namespace SongsinkDL
 
             p_modelBuilder.Entity<Word>()
                 .HasKey(wrd => wrd.Id);
-
-            p_modelBuilder.Entity<GameHistory>()
-                .Property(gh => gh.Id)
-                .ValueGeneratedOnAdd();
-
-            p_modelBuilder.Entity<GameHistoryPicture>()
-                .Property(ghp => ghp.Id)
-                .ValueGeneratedOnAdd();
 
             p_modelBuilder.Entity<CustomCategory>()
                 .Property(cc => cc.Id)
