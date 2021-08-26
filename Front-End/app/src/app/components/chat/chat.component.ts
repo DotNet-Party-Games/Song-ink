@@ -27,6 +27,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   firstCorrect:boolean;
   ableToScore:boolean=true;
   activeDrawer:boolean;
+  receiveMessage : boolean = true;
 
 
   title = 'socketio-angular';
@@ -34,23 +35,20 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(private socketService: SocketIoService) {}
 
   ngOnInit() {
+    let audio = new Audio('./assets/Send_Message.wav');
     this._roomsub = this.socketService.currentRoom.subscribe(currentRoom => this.room = currentRoom);
     this._roomsub = this.socketService.goalWord.subscribe(theWord => this.goal=theWord);
-    // this._roomsub = this.socketService.currentRoom.pipe(
-    //   startWith({ id: '',})
-    // ).subscribe(room => this.room = room);
-
-    // this._roomsub = this.socketService.chatLogOfRoom.subscribe(recursive => this.chatlines = recursive.reverse());
-    // this._roomsub = this.socketService.getNewMessage().subscribe((message:string)=> {
-    //     this.chatlines.unshift(message);
-    //   })
-
-      this._roomsub = this.socketService.newMessage.subscribe((message:string)=> {
-        this.chatlines.unshift(message);
-      })
-      this._roomsub= this.socketService.maxPoints.subscribe(test => this.firstCorrect=test);
-      this._roomsub=this.socketService.ableToScore.subscribe(test=>this.ableToScore=test);
-      this._roomsub=this.socketService.activeDrawer.subscribe(test=>this.activeDrawer=test);
+    this._roomsub = this.socketService.newMessage.subscribe((message:string)=> {
+      this.chatlines.unshift(message);
+      if(this.receiveMessage){
+        console.log("playing message sound");
+        audio.play();
+      }
+      this.receiveMessage = true;
+    })
+    this._roomsub= this.socketService.maxPoints.subscribe(test => this.firstCorrect=test);
+    this._roomsub=this.socketService.ableToScore.subscribe(test=>this.ableToScore=test);
+    this._roomsub=this.socketService.activeDrawer.subscribe(test=>this.activeDrawer=test);
 
   }
 
@@ -60,29 +58,26 @@ export class ChatComponent implements OnInit, OnDestroy {
     console.log(this.ableToScore);
     if(message&&this.goal&&this.ableToScore&&!this.activeDrawer){
       if(message.toLocaleLowerCase()==this.goal.toLocaleLowerCase()){
-      this.socketService.editChat(" guessed correctly!");
-      if(this.firstCorrect){
-        this.socketService.AddPoints(100);
-      } else{
-        this.socketService.AddPoints(50);
-      }
+        this.receiveMessage = false;
+        this.socketService.editChat(" guessed correctly!");
+        if(this.firstCorrect){
+          this.socketService.AddPoints(100);
+        } 
+        else{
+          this.socketService.AddPoints(50);
+        }
       }
       else if(message){
+        this.receiveMessage = false;
         this.socketService.editChat(message);
+      }
     }
-    }else if(message){
+    else if(message){
       console.log("inside else");
-    this.socketService.editChat(message);
+      this.receiveMessage = false;
+      this.socketService.editChat(message);
+    }
   }
-}
-
-
-  // updateChat(){
-  //   this.backup.forEach(element => {
-  //     this.chatlines.unshift(element);
-  //   });
-  // }
-
 
   ngOnDestroy(){
     this.socketService.leaveRoom();
