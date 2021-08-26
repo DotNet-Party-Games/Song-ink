@@ -101,5 +101,16 @@ namespace SongsinkDL
         {
             return await _context.LeaderBoards.FirstOrDefaultAsync(board => board.nickName == p_playerNickName);
         }
+
+        public async Task<LeaderBoard> UpdatePlayerScore(LeaderBoard p_player)
+        {
+            var entity =  _context.LeaderBoards.FirstOrDefault(board => board.nickName == p_player.nickName);
+            entity.currentScore = p_player.currentScore;
+            entity.overallScore = p_player.overallScore;
+
+            _context.LeaderBoards.Update(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
     }
 }

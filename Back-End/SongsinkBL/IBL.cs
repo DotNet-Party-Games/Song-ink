@@ -123,5 +123,12 @@ namespace SongsinkBL
         /// <param name="p_playerID">The player's nickname from Auth0</param>
         /// <returns>Returns a LeaderBoard object </returns>
         Task<LeaderBoard> GetPlayerScore(string p_playerNickName);
+
+        /// <summary>
+        /// Calls the DL to update a player's score in the leaderboard table
+        /// </summary>
+        /// <param name="p_player">A LeaderBoard object containing the updated player score information</param>
+        /// <returns>A LeaderBoard object containing the updated database entry</returns>
+        Task<LeaderBoard> UpdatePlayerScore(LeaderBoard p_player);
     }
 }
