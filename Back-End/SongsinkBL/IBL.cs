@@ -116,5 +116,12 @@ namespace SongsinkBL
         /// <param name="p_customCategoryID">the custom category ID</param>
         /// <returns>Returns a list of CustomWord objects</returns>
         Task<List<CustomWord>> GetCustomWords(int p_customCategoryID);
+
+        /// <summary>
+        /// Calls the DL to retrieve the score of a user
+        /// </summary>
+        /// <param name="p_playerID">The player's nickname from Auth0</param>
+        /// <returns>Returns a LeaderBoard object </returns>
+        Task<LeaderBoard> GetPlayerScore(string p_playerNickName);
     }
 }

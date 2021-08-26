@@ -123,5 +123,10 @@ namespace SongsinkBL
             return await _repo.GetCustomWords(p_customCategoryID);
         }
 
+        public async Task<LeaderBoard> GetPlayerScore(string p_playerNickName)
+        {
+            return await _repo.GetPlayerScore(p_playerNickName);
+        }
+
     }
 }

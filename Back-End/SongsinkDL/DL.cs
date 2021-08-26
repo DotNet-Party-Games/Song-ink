@@ -96,5 +96,10 @@ namespace SongsinkDL
         {
             return await _context.CustomWords.Where(word => word.CustomCategoryId == p_customCategoryID).Select(word => word).ToListAsync();
         }
+
+        public async Task<LeaderBoard> GetPlayerScore(string p_playerNickName)
+        {
+            return await _context.LeaderBoards.FirstOrDefaultAsync(board => board.nickName == p_playerNickName);
+        }
     }
 }
