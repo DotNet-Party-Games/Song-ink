@@ -166,6 +166,23 @@ namespace SongsinkTests
             }
         }
 
+        [Fact]
+        public async Task GetPlayerScoreShouldGetPlayerScore()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                LeaderBoard entry = await dl.GetPlayerScore("jonathan1");
+
+                Assert.NotNull(entry);
+                Assert.Equal("jonathan1", entry.nickName);
+                Assert.Equal(3, entry.Id);
+                Assert.Equal(1000, entry.currentScore);
+                Assert.Equal(2000, entry.overallScore);
+            }
+        }
+
         private void Seed()
         {
             using (var context = new SIDbContext(_options))
@@ -279,7 +296,27 @@ namespace SongsinkTests
                         SongURL = "zxc.com"
                     }
                 );
-            
+
+                context.LeaderBoards.AddRange(
+                    new LeaderBoard
+                    {
+                        nickName="jman9",
+                        currentScore=240,
+                        overallScore=5000
+                    },
+                    new LeaderBoard
+                    {
+                        nickName="jacob1",
+                        currentScore=450,
+                        overallScore=500
+                    },
+                    new LeaderBoard
+                    {
+                        nickName="jonathan1",
+                        currentScore=1000,
+                        overallScore=2000
+                    }
+                );
             context.SaveChanges();
             }
         }
