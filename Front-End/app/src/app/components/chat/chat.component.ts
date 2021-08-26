@@ -40,9 +40,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     this._roomsub = this.socketService.goalWord.subscribe(theWord => this.goal=theWord);
     this._roomsub = this.socketService.newMessage.subscribe((message:string)=> {
       this.chatlines.unshift(message);
-      console.log("outside if " + this.receiveMessage);
       if(this.receiveMessage){
-        console.log("play message sound");
+        console.log("playing message sound");
         audio.play();
       }
       this.receiveMessage = true;
