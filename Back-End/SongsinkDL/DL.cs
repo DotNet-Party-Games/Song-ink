@@ -57,36 +57,6 @@ namespace SongsinkDL
             return await _context.Songs.Select(song => song).ToListAsync();
         }
 
-
-        public async Task<Player> GetAPlayer(string p_email)
-        {
-            return await _context.Players.FirstOrDefaultAsync(p => p.Email == p_email);
-        }
-
-        public async Task<Player> GetAPlayer(int p_id)
-        {
-            return await _context.Players.FirstOrDefaultAsync(p => p.Id == p_id);
-        }
-
-        public async Task<Player> UpdatePlayer(Player p_player)
-        {
-            Player currentPlayer = await _context.Players.FirstOrDefaultAsync(p => p.Id == p_player.Id);
-            currentPlayer.PlayerName = p_player.PlayerName;
-            currentPlayer.PlayerScore = p_player.PlayerScore;
-            currentPlayer.CurrentScore = p_player.CurrentScore;
-            currentPlayer.GamesPlayed = p_player.GamesPlayed;
-            currentPlayer.Email = p_player.Email;
-            await _context.SaveChangesAsync();
-            return await _context.Players.FirstOrDefaultAsync(p => p.Id == p_player.Id);
-        }
-
-        public async Task<Player> CreateNewPlayer(Player p_player)
-        {
-            await _context.Players.AddAsync(p_player);
-            await _context.SaveChangesAsync();
-            return await _context.Players.FirstOrDefaultAsync(p => p.Email == p_player.Email);
-        }
-
         public async Task<CustomWord> AddPlayerWord(CustomWord p_word)
         {
             await _context.CustomWords.AddAsync(p_word);
@@ -119,8 +89,12 @@ namespace SongsinkDL
 
         public async Task<List<CustomCategory>> GetCustomCategories(int p_playerID)
         {
-            return await _context.CustomCategories.Where(category => category.PlayerId == p_playerID).ToListAsync();
+            return await _context.CustomCategories.Where(category => category.PlayerId == p_playerID).Select(category => category).ToListAsync();
         }
-        
+
+        public async Task<List<CustomWord>> GetCustomWords(int p_customCategoryID)
+        {
+            return await _context.CustomWords.Where(word => word.CustomCategoryId == p_customCategoryID).Select(word => word).ToListAsync();
+        }
     }
 }

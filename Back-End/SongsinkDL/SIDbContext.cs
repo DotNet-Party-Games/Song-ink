@@ -9,7 +9,6 @@ namespace SongsinkDL
     {
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Player> Players { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Word> Words { get; set; }
         public DbSet<CustomCategory> CustomCategories { get; set; }
@@ -34,13 +33,6 @@ namespace SongsinkDL
 
             p_modelBuilder.Entity<Category>()
                 .HasKey(cat => cat.Id);
-
-            p_modelBuilder.Entity<Player>()
-                .Property(pla => pla.Id)
-                .ValueGeneratedOnAdd();
-
-            p_modelBuilder.Entity<Player>()
-                .HasKey(pla => pla.Id);
 
             p_modelBuilder.Entity<Song>()
                 .Property(sng => sng.Id)

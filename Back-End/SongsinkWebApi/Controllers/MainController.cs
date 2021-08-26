@@ -63,45 +63,45 @@ namespace SongsinkWebApi.Controllers
             return Ok(await _BL.GetAllSongs());
         }
 
-        [HttpGet("getAPlayerWithId/{p_id}")]
-        public async Task<IActionResult> GetAPlayerWithId(int p_id)
-        {
-            return Ok(await _BL.GetAPlayer(p_id));
-        }
+        // [HttpGet("getAPlayerWithId/{p_id}")]
+        // public async Task<IActionResult> GetAPlayerWithId(int p_id)
+        // {
+        //     return Ok(await _BL.GetAPlayer(p_id));
+        // }
 
-        [HttpGet("getAPlayer/{p_email}")]
-        public async Task<IActionResult> GetAPlayer(string p_email)
-        {
-            return Ok(await _BL.GetAPlayer(p_email));
-        }
+        // [HttpGet("getAPlayer/{p_email}")]
+        // public async Task<IActionResult> GetAPlayer(string p_email)
+        // {
+        //     return Ok(await _BL.GetAPlayer(p_email));
+        // }
 
-        [HttpPost("createNewPlayer")]
-        public async Task<IActionResult> CreateNewPlayer([FromBody] Player p_player)
-        {
-            return Created("api/Main/createNewPlayer", await _BL.CreateNewPlayer(p_player));
-        }
+        // [HttpPost("createNewPlayer")]
+        // public async Task<IActionResult> CreateNewPlayer([FromBody] Player p_player)
+        // {
+        //     return Created("api/Main/createNewPlayer", await _BL.CreateNewPlayer(p_player));
+        // }
 
-        [HttpPut("updatePlayer")]
-        public async Task<IActionResult> UpdatePlayer([FromBody] Player p_player)
-        {
-            return Ok(await _BL.UpdatePlayer(p_player));
-        }
+        // [HttpPut("updatePlayer")]
+        // public async Task<IActionResult> UpdatePlayer([FromBody] Player p_player)
+        // {
+        //     return Ok(await _BL.UpdatePlayer(p_player));
+        // }
 
-        [HttpGet("getScoreOfPlayer/{p_id}")]
-        public async Task<IActionResult> GetScoreOfPlayer(int p_id)
-        {
-            Player tempPlayer = await _BL.GetAPlayer(p_id);
-            return Ok(tempPlayer.CurrentScore);
-        }
+        // [HttpGet("getScoreOfPlayer/{p_id}")]
+        // public async Task<IActionResult> GetScoreOfPlayer(int p_id)
+        // {
+        //     Player tempPlayer = await _BL.GetAPlayer(p_id);
+        //     return Ok(tempPlayer.CurrentScore);
+        // }
 
-        [HttpPut("updateScoreOfPlayer/{p_id}")]
-        public async Task<IActionResult> UpdateScoreOfPlayer([FromBody] int p_score, int p_id)
-        {
-            Player player = await _BL.GetAPlayer(p_id);
-            player.PlayerScore += p_score;
-            player.CurrentScore += p_score;
-            return Ok(await _BL.UpdatePlayer(player));
-        }
+        // [HttpPut("updateScoreOfPlayer/{p_id}")]
+        // public async Task<IActionResult> UpdateScoreOfPlayer([FromBody] int p_score, int p_id)
+        // {
+        //     Player player = await _BL.GetAPlayer(p_id);
+        //     player.PlayerScore += p_score;
+        //     player.CurrentScore += p_score;
+        //     return Ok(await _BL.UpdatePlayer(player));
+        // }
         
         [HttpGet("getPlayerWords/{p_id}")]
         public async Task<IActionResult> getPlayerWords(int p_id)

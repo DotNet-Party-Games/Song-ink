@@ -69,34 +69,6 @@ namespace SongsinkBL
         /// </returns>
         Task<List<Song>> GetAllSongs();
 
-        /// <summary>
-        /// Calls the DL to get player from DB-Players
-        /// </summary>
-        /// <param name="p_email"></param>
-        /// <param name="p_password"></param>
-        /// <returns></returns>
-        Task<Player> GetAPlayer(string p_email);
-
-        /// <summary>
-        /// Calls the DL to get A Player from DB-Players
-        /// </summary>
-        /// <param name="p_id"></param>
-        /// <returns></returns>
-        Task<Player> GetAPlayer(int p_id);
-
-        /// <summary>
-        /// Calls the DL to update Player in DB-Players
-        /// </summary>
-        /// <param name="p_player"></param>
-        /// <returns></returns>
-        Task<Player> UpdatePlayer(Player p_player);
-        /// <summary>
-        /// Calls the DL to create new player in DB-Players
-        /// </summary>
-        /// <param name="p_player"></param>
-        /// <returns></returns>
-        Task<Player> CreateNewPlayer(Player p_player);
-
          /// <summary>
         /// Calls the DL to get all custom words created by a user
         /// </summary>
@@ -137,5 +109,12 @@ namespace SongsinkBL
         /// <param name="p_playerID">The ID of the user </param>
         /// <returns>Returns a list of custom categories</returns>
         Task<List<CustomCategory>> GetCustomCategories(int p_playerID);
+
+        /// <summary>
+        /// Calls the DL to get a list of custom words
+        /// </summary>
+        /// <param name="p_customCategoryID">the custom category ID</param>
+        /// <returns>Returns a list of CustomWord objects</returns>
+        Task<List<CustomWord>> GetCustomWords(int p_customCategoryID);
     }
 }

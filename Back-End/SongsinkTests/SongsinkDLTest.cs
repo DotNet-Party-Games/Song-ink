@@ -20,61 +20,227 @@ namespace SongsinkTests
             this.Seed();
         }
 
+        [Fact]
+        public async Task GetAllCategoriesShouldGetAllCategories()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                //Arrange
+                IDL dl = new DL(context);
+
+                //Act
+                List<Category> allCategories = await dl.GetAllCategories();
+
+                //Assert
+                Assert.Equal(6, allCategories.Count);
+                foreach (Category category in allCategories)
+                {
+                    Assert.NotNull(category);
+                    Assert.NotEqual(0,category.Id);
+                    Assert.NotEqual("", category.CategoryName);
+                }
+            }
+        }
+
+        [Fact]
+        public async Task GetCustomCategoriesShouldReturn3Categories()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                List<CustomCategory> categories = await dl.GetCustomCategories(1);
+
+                Assert.NotNull(categories);
+                Assert.Equal(3, categories.Count);
+                foreach(CustomCategory category in categories)
+                {
+                    Assert.NotNull(category);
+                    Assert.NotEqual(0, category.Id);
+                    Assert.NotEqual("", category.CustomCategoryName);
+                }
+            }
+        }
+
+        [Fact]
+        public async Task RemoveCustomCategoryShouldRemoveTheCategory()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                CustomCategory category = new CustomCategory
+                {
+                    Id=1
+                };
+                CustomCategory removedCategory = await dl.RemoveCustomCategory(category);
+
+                Assert.NotNull(removedCategory);
+                Assert.Equal(1, removedCategory.Id);
+                Assert.Equal("Fantasy", removedCategory.CustomCategoryName);
+            }
+        }
+        [Fact]
+        public async Task AddCustomCategoryShouldAddACategory()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                CustomCategory category = new CustomCategory
+                {
+                    PlayerId = 1,
+                    CustomCategoryName="Superheroes"
+                };
+
+                CustomCategory added = await dl.AddCustomCategory(category);
+
+                Assert.NotNull(added);
+                Assert.Equal("Superheroes", added.CustomCategoryName);
+            }
+        }
+
+        [Fact]
+        public async Task AddPlayerWordShouldAddWord()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                CustomWord word = new CustomWord
+                {
+                    PlayerId=1,
+                    CustomWordName="Knight",
+                    CustomCategoryId=1
+                };
+
+                CustomWord newWord = await dl.AddPlayerWord(word);
+
+                Assert.NotNull(newWord);
+                Assert.Equal(1, newWord.PlayerId);
+                Assert.Equal("Knight", newWord.CustomWordName);
+            }
+        }
+
+        [Fact]
+        public async Task RemoveCustomWordShouldRemoveTheWord()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+                CustomWord word = new CustomWord 
+                {
+                    Id=1
+                };
+
+                CustomWord removedWord = await dl.RemovePlayerWord(word);
+
+                Assert.NotNull(removedWord);
+                Assert.Equal(1, removedWord.Id);
+                Assert.Equal("Knight", removedWord.CustomWordName);
+                Assert.Equal(1, removedWord.PlayerId);
+                Assert.Equal(1, removedWord.CustomCategoryId);
+            }
+        }
+
+        [Fact]
+        public async Task GetCustomWordsShouldReturnAListOfCustomWords()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                List<CustomWord> words = await dl.GetCustomWords(1);
+                
+                Assert.NotNull(words);
+                Assert.NotEmpty(words);
+                Assert.Equal(3, words.Count);
+
+                foreach(CustomWord word in words)
+                {
+                    Assert.NotNull(word);
+                    Assert.NotEqual("", word.CustomWordName);
+                    Assert.NotEqual(2, word.PlayerId);
+                    Assert.NotEqual(2, word.CustomCategoryId);
+                }
+            }
+        }
+
         private void Seed()
         {
             using (var context = new SIDbContext(_options))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
-
-                context.Players.AddRange(
-                    new Player
-                    {
-                        PlayerName = "Player1",
-                        PlayerScore = 1000,
-                        CurrentScore = 875,
-                        GamesPlayed = 10,
-                        Email = "player1@gmail.com",
-                        //CustomWords = { "dog", "cat" }
-                    },
-                    new Player
-                    {
-                        Id = 2,
-                        PlayerName = "Player2",
-                        PlayerScore = 800,
-                        CurrentScore = 120,
-                        GamesPlayed = 15,
-                        Email = "player2@gmail.com",
-                        //CustomWords = { "rabbit", "dragon" }
-                    }
-                );
-
                 context.Categories.AddRange(
-                    new Category
+                    new Category()
                     {
                         Id = 1,
-                        CategoryName = "animal"
+                        CategoryName = "cat1"
                     },
-                    new Category
+                    new Category()
                     {
                         Id = 2,
-                        CategoryName = "fruit"
+                        CategoryName = "cat2"
+                    },
+                    new Category()
+                    {
+                        Id = 3,
+                        CategoryName = "cat3"
+                    },
+                    new Category()
+                    {
+                        Id = 4,
+                        CategoryName = "cat4"
+                    },
+                    new Category() //player word category
+                    {
+                        Id = 5,
+                        CategoryName = "playercat1"
+                    },
+                    new Category() //player word category
+                    {
+                        Id = 6,
+                        CategoryName = "playercat2"
                     }
                 );
-
                 context.CustomCategories.AddRange(
                     new CustomCategory 
                     {
-                        Id=1, 
                         PlayerId=1,
                         CustomCategoryName="Fantasy"
 
                     },
                     new CustomCategory
                     {
-                        Id=2,
                         PlayerId=1,
                         CustomCategoryName="Movies"
+                    },
+                    new CustomCategory
+                    {
+                        PlayerId=1,
+                        CustomCategoryName="Sports"
+                    }
+                );
+
+                context.CustomWords.AddRange(
+                    new CustomWord 
+                    {
+                        PlayerId=1,
+                        CustomCategoryId=1,
+                        CustomWordName="Knight"
+                    },
+                    new CustomWord
+                    {
+                        PlayerId=1,
+                        CustomCategoryId=1,
+                        CustomWordName="Wizard"
+                    },
+                    new CustomWord 
+                    {
+                        PlayerId=1,
+                        CustomCategoryId=1,
+                        CustomWordName="Quest"
                     }
                 );
 
@@ -113,48 +279,8 @@ namespace SongsinkTests
                         SongURL = "zxc.com"
                     }
                 );
-
-            }
-        }
-
-        [Fact]
-        public async void GetAllCategoriesShouldGetAllCategories()
-        {
-            using (var context = new SIDbContext(_options))
-            {
-                //Arrange
-                IDL dl = new DL(context);
-
-                //Act
-                List<Category> categories = new (await dl.GetAllCategories());
-
-                //Assert
-                //Assert.Equal(2, categories.Count());
-                foreach (Category category in categories)
-                {
-                    Assert.NotNull(category);
-                    Assert.NotEqual(0, category.Id);
-                    Assert.NotEqual("", category.CategoryName);
-                }
-            }
-        }
-        [Fact]
-        public async void AddCustomCategoryShouldAddACategory()
-        {
-            using (var context = new SIDbContext(_options))
-            {
-                IDL dl = new DL(context);
-
-                CustomCategory category = new CustomCategory
-                {
-                    PlayerId = 1,
-                    CustomCategoryName="Superheroes"
-                };
-
-                CustomCategory added = await dl.AddCustomCategory(category);
-
-                Assert.NotNull(added);
-                Assert.Equal("Superheroes", added.CustomCategoryName);
+            
+            context.SaveChanges();
             }
         }
     }   
