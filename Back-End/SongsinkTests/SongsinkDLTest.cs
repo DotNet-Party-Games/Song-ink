@@ -225,6 +225,22 @@ namespace SongsinkTests
             }
         }
 
+        [Fact]
+        public async Task AddPlayerShouldAddPlayerToLeaderBoard()
+        {
+            using(var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                LeaderBoard newPlayer = await dl.AddPlayer("jacobm9");
+
+                Assert.NotNull(newPlayer);
+                Assert.Equal("jacobm9", newPlayer.nickName);
+                Assert.Equal(0, newPlayer.currentScore);
+                Assert.Equal(0, newPlayer.overallScore);
+            }
+        }
+
         private void Seed()
         {
             using (var context = new SIDbContext(_options))
