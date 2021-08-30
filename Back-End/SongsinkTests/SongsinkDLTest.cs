@@ -184,6 +184,26 @@ namespace SongsinkTests
         }
 
         [Fact]
+        public async Task GetPlayers()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                List<LeaderBoard> players = await dl.GetPlayers();
+
+                Assert.NotNull(players);
+                Assert.Equal(3, players.Count);
+                Assert.Equal("jman9", players[0].nickName);
+                Assert.Equal(5000, players[0].overallScore);
+                Assert.Equal("jonathan1", players[1].nickName);
+                Assert.Equal(2000, players[1].overallScore);
+                Assert.Equal("jacob1", players[2].nickName);
+                Assert.Equal(500, players[2].overallScore);
+            }
+        }
+
+        [Fact]
         public async Task UpdatePlayerScoreShouldUpdateScore()
         {
             using (var context = new SIDbContext(_options))
