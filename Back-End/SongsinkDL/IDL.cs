@@ -102,5 +102,19 @@ namespace SongsinkDL
         /// <param name="p_customCategoryID">the id of the custom category</param>
         /// <returns>List of CustomWord objects</returns>
         Task<List<CustomWord>> GetCustomWords(int p_customCategoryID);
+
+        /// <summary>
+        /// Gets the player's current and overall score
+        /// </summary>
+        /// <param name="p_playerNickName">the player's nickname from Auth0</param>
+        /// <returns> Returns a LeaderBoard object</returns>
+        Task<LeaderBoard> GetPlayerScore(string p_playerNickName);
+
+        /// <summary>
+        /// Updates the player's current and overall score
+        /// </summary>
+        /// <param name="p_player">A LeaaderBoard object to identify the correct player</param>
+        /// <returns>Returns the updated leaderboard entry</returns>
+        Task<LeaderBoard> UpdatePlayerScore(LeaderBoard p_player);
     }
 }

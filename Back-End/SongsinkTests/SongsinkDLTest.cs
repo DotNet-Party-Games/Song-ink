@@ -166,6 +166,45 @@ namespace SongsinkTests
             }
         }
 
+        [Fact]
+        public async Task GetPlayerScoreShouldGetPlayerScore()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                LeaderBoard entry = await dl.GetPlayerScore("jman9");
+
+                Assert.NotNull(entry);
+                Assert.Equal("jman9", entry.nickName);
+                Assert.Equal(1, entry.Id);
+                Assert.Equal(240, entry.currentScore);
+                Assert.Equal(5000, entry.overallScore);
+            }
+        }
+
+        [Fact]
+        public async Task UpdatePlayerScoreShouldUpdateScore()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                LeaderBoard entry = new LeaderBoard 
+                {
+                    nickName="jman9",
+                    currentScore=100,
+                    overallScore=2000
+                };
+
+                LeaderBoard updatedEntry = await dl.UpdatePlayerScore(entry);
+
+                Assert.NotNull(updatedEntry);
+                Assert.Equal(100, updatedEntry.currentScore);
+                Assert.Equal(2000, updatedEntry.overallScore);
+            }
+        }
+
         private void Seed()
         {
             using (var context = new SIDbContext(_options))
@@ -207,17 +246,20 @@ namespace SongsinkTests
                 context.CustomCategories.AddRange(
                     new CustomCategory 
                     {
+                        Id=1,
                         PlayerId=1,
                         CustomCategoryName="Fantasy"
 
                     },
                     new CustomCategory
                     {
+                        Id=2,
                         PlayerId=1,
                         CustomCategoryName="Movies"
                     },
                     new CustomCategory
                     {
+                        Id=3,
                         PlayerId=1,
                         CustomCategoryName="Sports"
                     }
@@ -279,7 +321,30 @@ namespace SongsinkTests
                         SongURL = "zxc.com"
                     }
                 );
-            
+
+                context.LeaderBoards.AddRange(
+                    new LeaderBoard
+                    {
+                        Id=1,
+                        nickName="jman9",
+                        currentScore=240,
+                        overallScore=5000
+                    },
+                    new LeaderBoard
+                    {
+                        Id=2,
+                        nickName="jacob1",
+                        currentScore=450,
+                        overallScore=500
+                    },
+                    new LeaderBoard
+                    {
+                        Id=3,
+                        nickName="jonathan1",
+                        currentScore=1000,
+                        overallScore=2000
+                    }
+                );
             context.SaveChanges();
             }
         }

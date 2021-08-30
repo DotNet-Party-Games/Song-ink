@@ -9,6 +9,7 @@ namespace SongsinkDL
     {
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<LeaderBoard> LeaderBoards { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Word> Words { get; set; }
         public DbSet<CustomCategory> CustomCategories { get; set; }
@@ -54,6 +55,10 @@ namespace SongsinkDL
 
             p_modelBuilder.Entity<CustomWord>()
                 .Property(cw => cw.Id)
+                .ValueGeneratedOnAdd();
+            
+            p_modelBuilder.Entity<LeaderBoard>()
+                .Property(ldr => ldr.Id)
                 .ValueGeneratedOnAdd();
         }
     }
