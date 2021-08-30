@@ -184,6 +184,26 @@ namespace SongsinkTests
         }
 
         [Fact]
+        public async Task GetPlayers()
+        {
+            using (var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                List<LeaderBoard> players = await dl.GetPlayers();
+
+                Assert.NotNull(players);
+                Assert.Equal(3, players.Count);
+                Assert.Equal("jman9", players[0].nickName);
+                Assert.Equal(5000, players[0].overallScore);
+                Assert.Equal("jonathan1", players[1].nickName);
+                Assert.Equal(2000, players[1].overallScore);
+                Assert.Equal("jacob1", players[2].nickName);
+                Assert.Equal(500, players[2].overallScore);
+            }
+        }
+
+        [Fact]
         public async Task UpdatePlayerScoreShouldUpdateScore()
         {
             using (var context = new SIDbContext(_options))
@@ -202,6 +222,22 @@ namespace SongsinkTests
                 Assert.NotNull(updatedEntry);
                 Assert.Equal(100, updatedEntry.currentScore);
                 Assert.Equal(2000, updatedEntry.overallScore);
+            }
+        }
+
+        [Fact]
+        public async Task AddPlayerShouldAddPlayerToLeaderBoard()
+        {
+            using(var context = new SIDbContext(_options))
+            {
+                IDL dl = new DL(context);
+
+                LeaderBoard newPlayer = await dl.AddPlayer("jacobm9");
+
+                Assert.NotNull(newPlayer);
+                Assert.Equal("jacobm9", newPlayer.nickName);
+                Assert.Equal(0, newPlayer.currentScore);
+                Assert.Equal(0, newPlayer.overallScore);
             }
         }
 
