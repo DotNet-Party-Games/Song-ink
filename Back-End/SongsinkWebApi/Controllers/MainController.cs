@@ -110,5 +110,11 @@ namespace SongsinkWebApi.Controllers
         {
             return Ok(await _BL.RemovePlayerWord(p_word));
         }
+
+        [HttpGet("getPlayers")]
+        public async Task<IActionResult> getPlayers()
+        {
+            return Ok(await _BL.GetPlayers());
+        }
     }
 }
