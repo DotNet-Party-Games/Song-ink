@@ -130,5 +130,11 @@ namespace SongsinkBL
         /// <param name="p_player">A LeaderBoard object containing the updated player score information</param>
         /// <returns>A LeaderBoard object containing the updated database entry</returns>
         Task<LeaderBoard> UpdatePlayerScore(LeaderBoard p_player);
+
+        /// <summary>
+        /// Calls the DL to retrieve all stored users with their overall score
+        /// </summary>
+        /// <returns>A list of Leaderboard objects </returns>
+        Task<List<LeaderBoard>> GetPlayers();
     }
 }

@@ -133,5 +133,10 @@ namespace SongsinkBL
             return await _repo.UpdatePlayerScore(p_player);
         }
 
+        public async Task<List<LeaderBoard>> GetPlayers()
+        {
+            return await _repo.GetPlayers();
+        }
+
     }
 }

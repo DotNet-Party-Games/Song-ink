@@ -116,5 +116,11 @@ namespace SongsinkDL
         /// <param name="p_player">A LeaaderBoard object to identify the correct player</param>
         /// <returns>Returns the updated leaderboard entry</returns>
         Task<LeaderBoard> UpdatePlayerScore(LeaderBoard p_player);
+
+        /// <summary>
+        /// Retrieves a list of users with their overall score
+        /// </summary>
+        /// <returns>A list of Leaderboard objects</returns>
+        Task<List<LeaderBoard>> GetPlayers();
     }
 }
