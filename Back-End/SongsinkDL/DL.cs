@@ -119,5 +119,19 @@ namespace SongsinkDL
             players.Sort( (play1, play2) => play2.overallScore.CompareTo(play1.overallScore));
             return players;
         }
+
+        public async Task<LeaderBoard> AddPlayer(string p_player)
+        {
+            LeaderBoard newPlayer = new LeaderBoard
+            {
+                nickName = p_player,
+                currentScore = 0,
+                overallScore = 0
+            };
+
+            await _context.LeaderBoards.AddAsync(newPlayer);
+            await _context.SaveChangesAsync();
+            return newPlayer;
+        }
     }
 }

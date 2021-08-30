@@ -122,5 +122,12 @@ namespace SongsinkDL
         /// </summary>
         /// <returns>A list of Leaderboard objects</returns>
         Task<List<LeaderBoard>> GetPlayers();
+
+        /// <summary>
+        /// Adds a player to the LeaderBoard table
+        /// </summary>
+        /// <param name="p_player">the player's username</param>
+        /// <returns></returns>
+        Task<LeaderBoard> AddPlayer(string p_player);
     }
 }

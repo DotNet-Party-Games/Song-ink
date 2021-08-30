@@ -138,5 +138,10 @@ namespace SongsinkBL
             return await _repo.GetPlayers();
         }
 
+        public async Task<LeaderBoard> AddPlayer(string p_player)
+        {
+            return await _repo.AddPlayer(p_player);
+        }
+
     }
 }

@@ -136,5 +136,12 @@ namespace SongsinkBL
         /// </summary>
         /// <returns>A list of Leaderboard objects </returns>
         Task<List<LeaderBoard>> GetPlayers();
+
+        /// <summary>
+        /// Calls the DL to insert a new user into the LeaderBoard table
+        /// </summary>
+        /// <param name="p_player">the player's username</param>
+        /// <returns></returns>
+        Task<LeaderBoard> AddPlayer(string p_player);
     }
 }
