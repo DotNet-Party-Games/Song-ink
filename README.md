@@ -54,19 +54,19 @@ The Songs-ink App is a web application to join multiplayer rooms, play a drawing
 
 -----------------------------------------------------------------------------------------------------------------------
 Getting Started
-BackEnd:
-- restore dependencies: dotnet restore
-- connection string can be found at SongsinkWebApi/appsettings
-SocketServer:
-- restore dependencies: npm install
-FrontEnd:
-- it will be located in GameHubUI/projects/songsink after integration
+- BackEnd:
+  - restore dependencies: dotnet restore
+  - connection string can be found at SongsinkWebApi/appsettings
+- SocketServer:
+  - restore dependencies: npm install
+- FrontEnd:
+  - it will be located in GameHubUI/projects/songsink after integration
 
 Usage
-BackEnd: 
-- It is an api that provide end points to get data about the game
-- You can apply new migration in SongsinkDL/SIDbContext
-SocketServer:
-- It is responsible for in-game chatting and broadcasting logics
-FrontEnd:
-- It is responsible for UI of the game as well as all the game logics
+- BackEnd: 
+  - It is an api that provide end points to get data about the game
+  - You can apply new migration in SongsinkDL/SIDbContext
+- SocketServer:
+  - It is responsible for in-game chatting and broadcasting logics
+- FrontEnd:
+  - It is responsible for UI of the game as well as all the game logics
